@@ -1,0 +1,2 @@
+BeautifulSoup==3.2.0
+Flask==0.11
