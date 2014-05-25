@@ -12,9 +12,16 @@ class zap:
 		Initialize for the zap class, creates a parser object and uses it to parse options
 		"""
 		self.parser = optparse.OptionParser()
-		self.parser.add_option('-t', '--term', help= 'Term to be searched', dest='term')
+		self.parser.add_option('-t', '--term', help = 'Term to be searched', dest ='term')
 		(opts, args) = self.parser.parse_args()
 		if opts.term is None:
 			print 'Passing a term is necessary'
-			parser.print_help()
+			self.parser.print_help()
 			exit(-1)
+		
+
+def main():
+	zap()
+
+if __name__ == '__main__':
+	main()				
