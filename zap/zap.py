@@ -1,7 +1,8 @@
 import requests
-from lxml import html
 import optparse
+from readability import Readability
 
+Wiki_URL = 'https://en.wikipedia.org/wiki/'
 class zap:
 	"""
 	Zap class for providing interface with the software
@@ -18,7 +19,17 @@ class zap:
 			print 'Passing a term is necessary'
 			self.parser.print_help()
 			exit(-1)
-		
+		self.getContent(opts.term)	
+	
+	def getContent(self, term):
+		url = Wiki_URL + term
+		print '[+] Retrieving content from ' + url 
+		html = requests.get(url).content
+		parser = Readability(html.decode('utf8'))
+
+		# parser.title
+		# parser.article
+		print parser.article.get_text()
 
 def main():
 	zap()
