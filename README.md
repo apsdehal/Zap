@@ -9,4 +9,5 @@ Your one stop solution to generate those massive ppts. Zap uses the power of pyt
 
 #Dependencies
 - Requests
-- Lxml
+- [Readability](https://github.com/reorx/readability)
+
