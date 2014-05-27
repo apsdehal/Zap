@@ -1,2 +1,3 @@
 Requests==2.3.0
 -e git+https://github.com/reorx/readability@698fc31f4b4e91662ecb22c3460878f4f389d89e#egg=readability-master
+python-pptx==0.2.6

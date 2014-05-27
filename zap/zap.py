@@ -1,6 +1,8 @@
 import requests
 import optparse
 from readability import Readability
+from pptx import Presentation
+from pptx.util import Inches, Pt
 
 Wiki_URL = 'https://en.wikipedia.org/wiki/'
 class zap:
@@ -30,6 +32,18 @@ class zap:
 		# parser.title
 		# parser.article
 		print parser.article.get_text()
+
+	def generatePPT(self, content):		
+		self.prs = Presentation()
+		layout = self.prs.slide_layouts[6]
+
+	def addSlide(self, layout, content):
+		slide = self.prs.slides.add_slide(layout)
+
+		left = top = width = height = Inches(1)
+		txBox = slide.shapes.add_textbox(left, top, width, height)
+		tf = txBox.textframe
+		tf.text = content
 
 def main():
 	zap()
