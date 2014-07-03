@@ -1,5 +1,5 @@
 import requests
-import optparse
+import argparse
 import wikipedia as wp
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -16,15 +16,17 @@ class zap:
         Initialize for the zap class, creates a parser object and uses it to
         parse options
         """
-        self.parser = optparse.OptionParser()
-        self.parser.add_option(
-            '-t', '--term', help='Term to be searched', dest='term')
-        (opts, args) = self.parser.parse_args()
-        if opts.term is None:
+        self.desc = "Python based Wikipedia article's PPT generator"
+        self.parser = argparse.ArgumentParser(description=(self.desc))
+        self.parser.add_argument(
+            '-t', dest='term', type=str, default=None, help='Term to search')
+        args = vars(self.parser.parse_args())
+
+        if args['term'] is None:
             print 'Passing a term is necessary'
             self.parser.print_help()
             exit(-1)
-        self.seacrhForTerm(opts.term)
+        self.searchForTerm(args['term'])
 
     def searchForTerm(self, term):
         """
