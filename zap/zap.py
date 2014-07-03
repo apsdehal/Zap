@@ -1,10 +1,9 @@
 import requests
 import optparse
-from readability import Readability
+import wikipedia as wp
 from pptx import Presentation
 from pptx.util import Inches, Pt
 
-Wiki_URL = 'https://en.wikipedia.org/wiki/'
 class zap:
 	"""
 	Zap class for providing interface with the software
@@ -21,19 +20,21 @@ class zap:
 			print 'Passing a term is necessary'
 			self.parser.print_help()
 			exit(-1)
-		self.getContent(opts.term)	
+		self.seacrhForTerm(opts.term)	
 	
-	def getContent(self, term):
-		url = Wiki_URL + term
-		print '[+] Retrieving content from ' + url 
-		html = requests.get(url).content
-		parser = Readability(html.decode('utf8'))
+	def searchForTerm(self, term):
+		print '[+] Searching for ' + term + 'at Wikipedia' 
+		searchResults = wp.search(term)
+		print '[+] We found following results:'
+		for i in range(0,len(searchResults)):
+			print i + ') ' + searchResults[i]
+		selected =  raw_input('Enter the no for which you want to generate Slides:')
+		self.getContent(searchResults[selected])
 
-		# parser.title
-		# parser.article
-		print parser.article.get_text()
+	def getContent(self, pageName):
+		content = wp.page(pageName)
 
-	def generatePPT(self, content):		
+	def generatePPT(self, page):		
 		self.prs = Presentation()
 		layout = self.prs.slide_layouts[6]
 
