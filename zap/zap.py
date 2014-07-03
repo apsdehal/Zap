@@ -23,6 +23,11 @@ class zap:
 		self.seacrhForTerm(opts.term)	
 	
 	def searchForTerm(self, term):
+		"""
+		Searches for term on wikipedia to find the related pages
+		term: The argument provided by the user to be searched
+		searchResults: The returned list of search results
+		"""
 		print '[+] Searching for ' + term + 'at Wikipedia' 
 		searchResults = wp.search(term)
 		print '[+] We found following results:'
@@ -32,13 +37,25 @@ class zap:
 		self.getContent(searchResults[selected])
 
 	def getContent(self, pageName):
-		content = wp.page(pageName)
+		"""
+		Gets the content from a page
+		pageName: The page title to be retrieved
+		page: The returned object with title, content and links
+		"""
+		page = wp.page(pageName)
+		self.generatePPT(page)
 
-	def generatePPT(self, page):		
+	def generatePPT(self, page):
+		"""
+		This function generates the PPT by adding various kind of slides throughout its execution
+		"""		
 		self.prs = Presentation()
 		layout = self.prs.slide_layouts[6]
 
 	def addSlide(self, layout, content):
+		"""
+		To add a single kind of slide
+		"""
 		slide = self.prs.slides.add_slide(layout)
 
 		left = top = width = height = Inches(1)
