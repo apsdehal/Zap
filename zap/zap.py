@@ -34,14 +34,14 @@ class zap:
         term: The argument provided by the user to be searched
         searchResults: The returned list of search results
         """
-        print '[+] Searching for ' + term + 'at Wikipedia'
+        print '[+] Searching for ' + term + ' at Wikipedia'
         searchResults = wp.search(term)
         print '[+] We found following results:'
         for i in range(0, len(searchResults)):
-            print i + ') ' + searchResults[i]
+            print str(i) + ') ' + searchResults[i]
         selected = raw_input(
             'Enter the no for which you want to generate Slides:')
-        self.getContent(searchResults[selected])
+        self.getContent(searchResults[int(selected)])
 
     def getContent(self, pageName):
         """
